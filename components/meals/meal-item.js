@@ -3,13 +3,13 @@ import Image from "next/image";
 
 import classes from "./meal-item.module.css";
 
-export default function MealItem({ title, slug, image, summary, creator }) {
+export default function MealItem({ id, title,  image, summary, creator }) {
   return (
     <article className={classes.meal}>
       <header>
         <div className={classes.image}>
           <Image
-            src={`https://ahmedshalaby-flavorfiesta-images.s3.eu-central-1.amazonaws.com/${image}`}
+            src={`https://res.cloudinary.com/aamas/image/upload/${image}`}
             alt={title}
             fill
           />
@@ -22,7 +22,7 @@ export default function MealItem({ title, slug, image, summary, creator }) {
       <div className={classes.content}>
         <p className={classes.summary}>{summary}</p>
         <div className={classes.actions}>
-          <Link href={`/meals/${slug}`}>View Details</Link>
+          <Link href={`/meals/${id}`}>View Details</Link>
         </div>
       </div>
     </article>

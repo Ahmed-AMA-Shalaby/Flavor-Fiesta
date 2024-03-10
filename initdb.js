@@ -4,7 +4,6 @@ const db = sql('meals.db');
 const dummyMeals = [
   {
     title: 'Juicy Cheese Burger',
-    slug: 'juicy-cheese-burger',
     image: 'burger.jpg',
     summary:
       'A mouth-watering burger with a juicy beef patty and melted cheese, served in a soft bun.',
@@ -26,7 +25,6 @@ const dummyMeals = [
   },
   {
     title: 'Spicy Curry',
-    slug: 'spicy-curry',
     image: 'curry.jpg',
     summary:
       'A rich and spicy curry, infused with exotic spices and creamy coconut milk.',
@@ -51,7 +49,6 @@ const dummyMeals = [
   },
   {
     title: 'Homemade Dumplings',
-    slug: 'homemade-dumplings',
     image: 'dumplings.jpg',
     summary:
       'Tender dumplings filled with savory meat and vegetables, steamed to perfection.',
@@ -73,7 +70,6 @@ const dummyMeals = [
   },
   {
     title: 'Classic Mac n Cheese',
-    slug: 'classic-mac-n-cheese',
     image: 'macncheese.jpg',
     summary:
       "Creamy and cheesy macaroni, a comforting classic that's always a crowd-pleaser.",
@@ -98,7 +94,6 @@ const dummyMeals = [
   },
   {
     title: 'Authentic Pizza',
-    slug: 'authentic-pizza',
     image: 'pizza.jpg',
     summary:
       'Hand-tossed pizza with a tangy tomato sauce, fresh toppings, and melted cheese.',
@@ -120,7 +115,6 @@ const dummyMeals = [
   },
   {
     title: 'Wiener Schnitzel',
-    slug: 'wiener-schnitzel',
     image: 'schnitzel.jpg',
     summary:
       'Crispy, golden-brown breaded veal cutlet, a classic Austrian dish.',
@@ -142,7 +136,6 @@ const dummyMeals = [
   },
   {
     title: 'Fresh Tomato Salad',
-    slug: 'fresh-tomato-salad',
     image: 'tomato-salad.jpg',
     summary:
       'A light and refreshing salad with ripe tomatoes, fresh basil, and a tangy vinaigrette.',
@@ -167,8 +160,7 @@ const dummyMeals = [
 db.prepare(`
    CREATE TABLE IF NOT EXISTS meals (
        id INTEGER PRIMARY KEY AUTOINCREMENT,
-       slug TEXT NOT NULL UNIQUE,
-       title TEXT NOT NULL,
+          title TEXT NOT NULL,
        image TEXT NOT NULL,
        summary TEXT NOT NULL,
        instructions TEXT NOT NULL,
@@ -181,8 +173,7 @@ async function initData() {
   const stmt = db.prepare(`
       INSERT INTO meals VALUES (
          null,
-         @slug,
-         @title,
+         @     @title,
          @image,
          @summary,
          @instructions,

@@ -5,7 +5,7 @@ import { getMeal } from "@/lib/meals";
 import classes from "./page.module.css";
 
 export async function generateMetadata({ params }) {
-  const meal = getMeal(params.mealSlug);
+  const meal = await getMeal(params.mealId);
 
   if (!meal) {
     notFound();
@@ -17,8 +17,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function MealDetailsPage({ params }) {
-  const meal = getMeal(params.mealSlug);
+export default async function MealDetailsPage({ params }) {
+  const meal = await getMeal(params.mealId);
 
   if (!meal) {
     notFound();
@@ -31,7 +31,7 @@ export default function MealDetailsPage({ params }) {
       <header className={classes.header}>
         <div className={classes.image}>
           <Image
-            src={`https://ahmedshalaby-flavorfiesta-images.s3.eu-central-1.amazonaws.com/${meal.image}`}
+            src={`https://res.cloudinary.com/aamas/image/upload/${meal.image}`}
             alt={meal.title}
             fill
           />
