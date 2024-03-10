@@ -3,8 +3,15 @@ import { notFound } from "next/navigation";
 
 import { getMeal } from "@/lib/meals";
 import classes from "./page.module.css";
+import { Metadata } from "next/types";
 
-export async function generateMetadata({ params }) {
+type DynamicRouteParameters = {
+  params: {
+    mealId: string;
+  };
+};
+
+const generateMetadata = async ({ params }: DynamicRouteParameters): Promise<Metadata> => {
   const meal = await getMeal(params.mealId);
 
   if (!meal) {
@@ -15,9 +22,9 @@ export async function generateMetadata({ params }) {
     title: meal.title,
     description: meal.summary,
   };
-}
+};
 
-export default async function MealDetailsPage({ params }) {
+const MealDetailsPage = async ({ params }: DynamicRouteParameters) => {
   const meal = await getMeal(params.mealId);
 
   if (!meal) {
@@ -39,7 +46,7 @@ export default async function MealDetailsPage({ params }) {
         <div className={classes.headerText}>
           <h1>{meal.title}</h1>
           <p className={classes.creator}>
-            by <a href={`mailto:${meal.creator_email}`}>{meal.creator}</a>
+            by <a href={`mailto:${meal.creatorEmail}`}>{meal.creator}</a>
           </p>
           <p className={classes.summary}>{meal.summary}</p>
         </div>
@@ -54,4 +61,7 @@ export default async function MealDetailsPage({ params }) {
       </main>
     </>
   );
-}
+};
+
+export { generateMetadata };
+export default MealDetailsPage;

@@ -2,8 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 import classes from "./meal-item.module.css";
+import { Meal } from "@/types/meal.type";
 
-export default function MealItem({ id, title,  image, summary, creator }) {
+const MealItem: React.FC<Meal> = ({ id, title, image, summary, creator }) => {
   return (
     <article className={classes.meal}>
       <header>
@@ -27,4 +28,6 @@ export default function MealItem({ id, title,  image, summary, creator }) {
       </div>
     </article>
   );
-}
+};
+
+export default MealItem;

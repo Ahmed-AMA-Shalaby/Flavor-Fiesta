@@ -1,5 +1,5 @@
 {
-  "name": "foodies",
+  "name": "flavor-fiesta",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,17 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.529.1",
-    "@aws-sdk/lib-dynamodb": "^3.529.1",
-    "better-sqlite3": "^9.1.1",
+    "@aws-sdk/client-dynamodb": "3.529.1",
+    "@aws-sdk/lib-dynamodb": "3.529.1",
     "next": "14.0.3",
-    "react": "^18",
-    "react-dom": "^18",
-    "uuid": "^9.0.1",
-    "xss": "^1.0.14"
+    "react": "18",
+    "react-dom": "18",
+    "uuid": "9.0.1",
+    "xss": "1.0.14"
   },
   "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "14.0.3"
+    "@types/node": "20.11.25",
+    "@types/react": "18.2.64",
+    "@types/react-dom": "18.2.21",
+    "@types/uuid": "9.0.8",
+    "eslint": "8",
+    "eslint-config-next": "14.0.3",
+    "typescript": "5.4.2"
   }
 }

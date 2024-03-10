@@ -1,11 +1,11 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-import mealIcon from '@/assets/icons/meal.png';
-import communityIcon from '@/assets/icons/community.png';
-import eventsIcon from '@/assets/icons/events.png';
-import classes from './page.module.css';
+import mealIcon from "@/assets/icons/meal.png";
+import communityIcon from "@/assets/icons/community.png";
+import eventsIcon from "@/assets/icons/events.png";
+import classes from "./page.module.css";
 
-export default function CommunityPage() {
+const CommunityPage = () => {
   return (
     <>
       <header className={classes.header}>
@@ -37,4 +37,6 @@ export default function CommunityPage() {
       </main>
     </>
   );
-}
+};
+
+export default CommunityPage;

@@ -3,7 +3,7 @@ import Link from "next/link";
 import ImageSlideshow from "@/components/images/image-slideshow";
 import classes from "./page.module.css";
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <header className={classes.header}>
@@ -50,4 +50,6 @@ export default function Home() {
       </main>
     </>
   );
-}
+};
+
+export default Home;
