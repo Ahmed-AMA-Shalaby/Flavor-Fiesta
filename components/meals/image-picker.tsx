@@ -21,7 +21,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ label, name }) => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target && event.target.files && event.target.files[0];
 
-    if (!file) {
+    if (!file || file.size > 2097152) {
       setPickedImage(null);
       return;
     }
@@ -38,7 +38,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ label, name }) => {
   return (
     <div className={classes.picker}>
       <label htmlFor={name}>{label}</label>
-      <div className={classes.controls}>
+      <div className={classes.wrapper}>
         <div className={classes.preview}>
           {!pickedImage && <p>No image picked yet.</p>}
           {pickedImage && (
@@ -58,13 +58,16 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ label, name }) => {
           ref={imageInput}
           onChange={handleImageChange}
         />
-        <button
-          className={classes.button}
-          type="button"
-          onClick={handlePickClick}
-        >
-          Pick an Image
-        </button>
+        <div className={classes.controls}>
+          <button
+            className={classes.button}
+            type="button"
+            onClick={handlePickClick}
+          >
+            Pick an Image
+          </button>
+          <p>Max Image size: 2 MB</p>
+        </div>
       </div>
     </div>
   );

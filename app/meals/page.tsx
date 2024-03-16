@@ -5,6 +5,8 @@ import classes from "./page.module.css";
 import MealsGrid from "@/components/meals/meals-grid";
 import { getMeals } from "@/lib/meals";
 
+export const revalidate = 0;
+
 export const metadata = {
   title: "All Meals",
   description: "Browse the delicious meals shared by our vibrant community.",
@@ -13,7 +15,7 @@ export const metadata = {
 const Meals = async () => {
   const meals = await getMeals();
 
-  return <MealsGrid meals={meals} />;
+  return <MealsGrid meals={meals!} />;
 };
 
 const MealsPage = () => {
@@ -21,7 +23,7 @@ const MealsPage = () => {
     <>
       <header className={classes.header}>
         <h1>
-          Delicious meals, created{" "}
+          Delicious meals, created
           <span className={classes.highlight}>by you</span>
         </h1>
         <p>

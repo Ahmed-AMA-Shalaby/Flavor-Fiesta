@@ -38,7 +38,6 @@ const shareMeal = async (
   }
 
   await saveMeal(meal);
-  revalidatePath("/meals");
   redirect("/meals");
 };
 

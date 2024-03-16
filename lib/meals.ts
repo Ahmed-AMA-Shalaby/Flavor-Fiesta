@@ -1,84 +1,65 @@
-import { DynamoDB } from "@aws-sdk/client-dynamodb";
-import {
-  DynamoDBDocumentClient,
-  PutCommand,
-  QueryCommand,
-  ScanCommand,
-} from "@aws-sdk/lib-dynamodb";
-
 import xss from "xss";
 import { v4 as uuidv4 } from "uuid";
 import { Meal } from "@/types/meal.type";
-
-const dbClient = new DynamoDB({});
-const docClient = DynamoDBDocumentClient.from(dbClient);
-const dbTableName = "flavor-fiesta";
-const cloudinaryUploadPresetName = "flavor-fiesta";
+import MealModel from "@/models/Meal";
+import dbConnect from "./dbConnect";
 
 const getMeals = async () => {
-  const command = new ScanCommand({
-    TableName: dbTableName,
-    Select: "ALL_ATTRIBUTES",
-  });
-
   try {
-    const response = await docClient.send(command);
-    return response.Items as Meal[];
+    await dbConnect();
+    const meals = (await MealModel.find({}).lean({ virtuals: true })) as Meal[];
+    return meals;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 };
 
 const getMeal = async (id: string) => {
-  const command = new QueryCommand({
-    TableName: dbTableName,
-    KeyConditionExpression: "id = :value",
-    ExpressionAttributeValues: { ":value": id },
-  });
-
   try {
-    const response = await docClient.send(command);
-    return response && response.Items && response.Items[0];
+    await dbConnect();
+    const meal = (await MealModel.findById(id).lean({
+      virtuals: true,
+    })) as Meal;
+    return meal;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 };
 
-const saveMeal = async (meal: Meal) => {
-  const mealImageId = uuidv4();
-
-  const formData = new FormData();
-  formData.append("file", meal.image);
-  formData.append("upload_preset", cloudinaryUploadPresetName);
-  formData.append("public_id", mealImageId);
+const uploadImage = async (image: File, imageId: string) => {
+  const uploadImageFormData = new FormData();
+  uploadImageFormData.append("file", image);
+  uploadImageFormData.append("upload_preset", "flavor-fiesta");
+  uploadImageFormData.append("public_id", imageId);
 
   await fetch("https://api.cloudinary.com/v1_1/aamas/image/upload", {
     method: "POST",
-    body: formData,
+    body: uploadImageFormData,
   });
+};
 
-  const mealImageExtension = (meal.image as File).name.split(".").pop();
-  meal.image = `${mealImageId}.${mealImageExtension}`;
-  meal.instructions = xss(meal.instructions);
-
-  const command = new PutCommand({
-    TableName: dbTableName,
-    Item: {
-      id: uuidv4(),
+const saveMeal = async (meal: Meal) => {
+  try {
+    meal.instructions = xss(meal.instructions);
+    const newMeal = new MealModel({
       creator: meal.creator,
       creatorEmail: meal.creatorEmail,
-      title: meal.title,
-      summary: meal.summary,
+      image: "",
       instructions: meal.instructions,
-      image: meal.image,
-    },
-  });
+      summary: meal.summary,
+      title: meal.title,
+    });
 
-  try {
-    const response = await docClient.send(command);
-    return response;
+    const mealImageExtension = (meal.image as File).name.split(".").pop();
+    const mealImageId = `flavor-fiesta/new/${newMeal.id}`;
+    await uploadImage(meal.image as File, mealImageId);
+
+    newMeal.image = `${mealImageId}.${mealImageExtension}`;
+    await dbConnect();
+    await newMeal.save();
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 };
+
 export { getMeals, getMeal, saveMeal };
