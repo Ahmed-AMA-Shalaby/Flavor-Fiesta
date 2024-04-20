@@ -1,19 +1,33 @@
 .header {
   display: flex;
+  flex-direction: column;
   gap: 3rem;
   margin: 3rem auto;
   width: 90%;
   max-width: 75rem;
 }
 
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+  }
+}
+
 .slideshow {
-  width: 40rem;
-  height: 25rem;
+  width: 100%;
+  aspect-ratio: 16 / 9;
 }
 
 .hero {
   color: #ddd6cb;
   font-size: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    text-align: left;
+  }
 }
 
 .hero h1 {
@@ -32,6 +46,15 @@
   font-size: 1.5rem;
   display: flex;
   gap: 1rem;
+  flex-direction: column;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .cta {
+    flex-direction: column;
+    text-align: left;
+  }
 }
 
 .cta a {
@@ -43,6 +66,7 @@
   color: #ffffff;
   font-weight: bold;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .cta a:hover,

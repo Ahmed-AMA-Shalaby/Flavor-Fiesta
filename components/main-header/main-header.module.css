@@ -2,12 +2,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 1rem;
+  gap: 1rem;
+  flex-direction: column;
+  padding: 2rem 1rem 0.2rem;
 }
 
 @media (min-width: 768px) {
   .header {
-    padding: 2rem 10%;
+    flex-direction: row;
+    padding: 2rem 5%;
   }
 }
 
@@ -17,8 +20,7 @@
   padding: 0;
   display: flex;
   gap: 1.5rem;
-  /* font-family: 'Montserrat', sans-serif; */
-  font-size: 1.25rem;
+  font-size: 0.9rem;
 }
 
 .logo {
@@ -32,7 +34,7 @@
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 0.15rem;
   text-transform: uppercase;
-  font-size: 1.5rem;
+  font-size: 1.35rem;
 }
 
 .logo img {
