@@ -1,4 +1,4 @@
-# Flavor Fiesta 🌮🥑🍜
+# [Flavor Fiesta](https://flavor-fiesta-aamas.vercel.app/) 🌮🥑🍜
 
 Welcome to Flavor Fiesta, a platform for foodies to share their favorite recipes with the world! 🎉
 
