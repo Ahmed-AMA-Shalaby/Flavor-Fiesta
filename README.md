@@ -12,8 +12,6 @@ Feel free to contribute and spread the culinary love with Flavor Fiesta! 🍽️
 
 - [Introduction](#introduction)
 - [Technologies Used](#technologies-used)
-- [How It Works](#how-it-works)
-- [Why Flavor Fiesta?](#why-flavor-fiesta)
 - [Credits](#credits)
 
 ## Introduction
@@ -47,8 +45,6 @@ Flavor Fiesta is built using a stack of cutting-edge technologies:
 - **Cloudinary**: A cloud-based image and video management service for storing, managing, and delivering media assets.
 
 - **Vercel**: A cloud platform for static sites and serverless functions, perfect for deploying Next.js applications with ease.
-
-- **Flavor Fiesta**: A platform for foodies to share their favorite recipes with the world!
 
 ## Credits
 
