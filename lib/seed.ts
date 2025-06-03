@@ -11,9 +11,9 @@ const seed = async () => {
           "Content-Type": "application/json",
           Authorization:
             "Basic " +
-            btoa(
+            Buffer.from(
               `${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}`
-            ),
+            ).toString("base64"),
         },
       }
     );
